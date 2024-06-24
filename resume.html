@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            color: #444;
+            margin-bottom: 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+        .actions {
+            text-align: right;
+        }
+        #resume-container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fdfdfd;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            display: none;
+        }
+        #resume-content h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        #resume-content p {
+            margin: 5px 0;
+        }
+        #resume-content img {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resume Builder</h1>
+
+        <div class="section" id="personal-info-section">
+            <h2>Personal Information</h2>
+            <div class="form-group">
+                <label for="photo">Upload your photo:</label>
+                <input type="file" id="photo" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="firstname">First Name:</label>
+                <input type="text" id="firstname" required>
+            </div>
+            <div class="form-group">
+                <label for="desired-role">Desired Role:</label>
+                <input type="text" id="desired-role" placeholder="Web Developer" required>
+            </div>
+            <div class="form-group">
+                <label for="contact-no">Your Contact No:</label>
+                <input type="text" id="contact-no" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email ID:</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" required>
+            </div>
+            <div class="form-group">
+                <label for="hobbies">Hobbies:</label>
+                <input type="text" id="hobbies" required>
+            </div>
+            <div class="form-group">
+                <label for="objective">Objective:</label>
+                <textarea id="objective" rows="3" required></textarea>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" onclick="addSection('personal-info-section')">Add Another</button>
+            <button type="button" onclick="removeSection('personal-info-section')">Delete</button>
+        </div>
+
+        <div class="section" id="social-links-section">
+            <h2>Social Links</h2>
+            <div class="form-group">
+                <label for="github">GitHub Link:</label>
+                <input type="url" id="github" required>
+            </div>
+            <div class="form-group">
+                <label for="linkedin">LinkedIn Link:</label>
+                <input type="url" id="linkedin" required>
+            </div>
+            <div class="form-group">
+                <label for="website">Personal Website Link:</label>
+                <input type="url" id="website" required>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" onclick="addSection('social-links-section')">Add Another</button>
+            <button type="button" onclick="removeSection('social-links-section')">Delete</button>
+        </div>
+
+        <div class="section" id="professional-info-section">
+            <h2>Professional Information</h2>
+            <div class="form-group">
+                <label for="programming-languages">Programming Languages:</label>
+                <input type="text" id="programming-languages" required>
+            </div>
+            <div class="form-group">
+                <label for="development-tools">Development Tools:</label>
+                <input type="text" id="development-tools" required>
+            </div>
+            <div class="form-group">
+                <label for="softwares">Softwares:</label>
+                <input type="text" id="softwares" required>
+            </div>
+            <div class="form-group">
+                <label for="work-experience">Work Experience:</label>
+                <textarea id="work-experience" rows="3" required></textarea>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" onclick="addSection('professional-info-section')">Add Another</button>
+            <button type="button" onclick="removeSection('professional-info-section')">Delete</button>
+        </div>
+
+        <div class="section" id="education-section">
+            <h2>Education</h2>
+            <div class="form-group">
+                <label for="school">School/College:</label>
+                <input type="text" id="school" required>
+            </div>
+            <div class="form-group">
+                <label for="degree">Degree/Course:</label>
+                <input type="text" id="degree" required>
+            </div>
+            <div class="form-group">
+                <label for="start-year">Start Year:</label>
+                <input type="number" id="start-year" required>
+            </div>
+            <div class="form-group">
+                <label for="end-year">End Year:</label>
+                <input type="number" id="end-year" required>
+            </div>
+            <div class="form-group">
+                <label for="cgpa">CGPA/Percentage:</label>
+                <input type="text" id="cgpa" required>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" onclick="addSection('education-section')">Add Another</button>
+            <button type="button" onclick="removeSection('education-section')">Delete</button>
+        </div>
+
+        <div class="section" id="project-details-section">
+            <h2>Project Details</h2>
+            <div class="form-group">
+                <label for="project-title">Project Title:</label>
+                <input type="text" id="project-title" required>
+            </div>
+            <div class="form-group">
+                <label for="project-description">Description:</label>
+                <textarea id="project-description" rows="3" required></textarea>
+            </div>
+        </div>
+        <div class="actions">
+            <button type="button" onclick="addSection('project-details-section')">Add Another</button>
+            <button type="button" onclick="removeSection('project-details-section')">Delete</button>
+        </div>
+
+        <div class="actions">
+            <button type="button" onclick="generateResume()">Generate Resume</button>
+        </div>
+        
+        <div id="resume-container">
+            <h1>Your Resume</h1>
+            <div id="resume-content"></div>
+            <button type="button" onclick="downloadResume()">Download Resume</button>
+        </div>
+    </div>
+
+    <script>
+        function addSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const clone = section.cloneNode(true);
+            document.querySelector('.container').insertBefore(clone, section.nextSibling);
+        }
+
+        function removeSection(sectionId) {
+            const sections = document.querySelectorAll(`#${sectionId}`);
+            if (sections.length > 1) {
+                sections[sections.length - 1].remove();
+            } else {
+                alert('At least one section must remain.');
+            }
+        }
+
+        function generateResume() {
+            const resumeContent = document.getElementById('resume-content');
+            resumeContent.innerHTML = '';
+
+            // Personal Information
+            const personalInfoSections = document.querySelectorAll('#personal-info-section');
+            personalInfoSections.forEach(section => {
+                const photo = section.querySelector('#photo').files[0];
+                const firstname = section.querySelector('#firstname').value;
+                const desiredRole = section.querySelector('#desired-role').value;
+                const contactNo = section.querySelector('#contact-no').value;
+                const email = section.querySelector('#email').value;
+                const age = section.querySelector('#age').value;
+                const hobbies = section.querySelector('#hobbies').value;
+                const objective = section.querySelector('#objective').value;
+
+                if (photo) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.style.width = '100px';
+                        resumeContent.appendChild(img);
+                    };
+                    reader.readAsDataURL(photo);
+                }
+
+                resumeContent.innerHTML += `
+                    <h2>Personal Information</h2>
+                    <p><strong>First Name:</strong> ${firstname}</p>
+                    <p><strong>Desired Role:</strong> ${desiredRole}</p>
+                    <p><strong>Contact No:</strong> ${contactNo}</p>
+                    <p><strong>Email ID:</strong> ${email}</p>
+                    <p><strong>Age:</strong> ${age}</p>
+                    <p><strong>Hobbies:</strong> ${hobbies}</p>
+                    <p><strong>Objective:</strong> ${objective}</p>
+                `;
+            });
+
+            // Social Links
+            const socialLinksSections = document.querySelectorAll('#social-links-section');
+            socialLinksSections.forEach(section => {
+                const github = section.querySelector('#github').value;
+                const linkedin = section.querySelector('#linkedin').value;
+                const website = section.querySelector('#website').value;
+
+                resumeContent.innerHTML += `
+                    <h2>Social Links</h2>
+                    <p><strong>GitHub Link:</strong> <a href="${github}">${github}</a></p>
+                    <p><strong>LinkedIn Link:</strong> <a href="${linkedin}">${linkedin}</a></p>
+                    <p><strong>Personal Website Link:</strong> <a href="${website}">${website}</a></p>
+                `;
+            });
+
+            // Professional Information
+            const professionalInfoSections = document.querySelectorAll('#professional-info-section');
+            professionalInfoSections.forEach(section => {
+                const programmingLanguages = section.querySelector('#programming-languages').value;
+                const developmentTools = section.querySelector('#development-tools').value;
+                const softwares = section.querySelector('#softwares').value;
+                const workExperience = section.querySelector('#work-experience').value;
+
+                resumeContent.innerHTML += `
+                    <h2>Professional Information</h2>
+                    <p><strong>Programming Languages:</strong> ${programmingLanguages}</p>
+                    <p><strong>Development Tools:</strong> ${developmentTools}</p>
+                    <p><strong>Softwares:</strong> ${softwares}</p>
+                    <p><strong>Work Experience:</strong> ${workExperience}</p>
+                `;
+            });
+
+            // Education
+            const educationSections = document.querySelectorAll('#education-section');
+            educationSections.forEach(section => {
+                const school = section.querySelector('#school').value;
+                const degree = section.querySelector('#degree').value;
+                const startYear = section.querySelector('#start-year').value;
+                const endYear = section.querySelector('#end-year').value;
+                const cgpa = section.querySelector('#cgpa').value;
+
+                resumeContent.innerHTML += `
+                    <h2>Education</h2>
+                    <p><strong>School/College:</strong> ${school}</p>
+                    <p><strong>Degree/Course:</strong> ${degree}</p>
+                    <p><strong>Start Year:</strong> ${startYear}</p>
+                    <p><strong>End Year:</strong> ${endYear}</p>
+                    <p><strong>CGPA/Percentage:</strong> ${cgpa}</p>
+                `;
+            });
+
+            // Project Details
+            const projectDetailsSections = document.querySelectorAll('#project-details-section');
+            projectDetailsSections.forEach(section => {
+                const projectTitle = section.querySelector('#project-title').value;
+                const projectDescription = section.querySelector('#project-description').value;
+
+                resumeContent.innerHTML += `
+                    <h2>Project Details</h2>
+                    <p><strong>Project Title:</strong> ${projectTitle}</p>
+                    <p><strong>Description:</strong> ${projectDescription}</p>
+                `;
+            });
+
+            document.getElementById('resume-container').style.display = 'block';
+        }
+
+        function downloadResume() {
+            const resumeContent = document.getElementById('resume-content').innerHTML;
+            const blob = new Blob([resumeContent], { type: 'text/html' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'resume.html';
+            link.click();
+        }
+    </script>
+</body>
+</html>
